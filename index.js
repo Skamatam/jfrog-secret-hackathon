@@ -83,6 +83,18 @@ function listEvents(auth) {
     const events = res.data.items;
     if (events.length) {
       console.log('Upcoming 10 events:');
+      /** Adding code to store the events**/
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       events.map((event, i) => {
         const start = event.start.dateTime || event.start.date;
         console.log(`${start} - ${event.summary}`);
