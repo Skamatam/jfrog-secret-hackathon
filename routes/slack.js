@@ -4,9 +4,11 @@ const Slack = require('slack');
 const bot = new Slack({token});
 var router = express.Router();
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+    // logs {args:{hyper:'card'}}
+    bot.api.test({hyper:'card'}).then(console.log);
+
+    res.send("ok");
 });
 
 module.exports = router;
