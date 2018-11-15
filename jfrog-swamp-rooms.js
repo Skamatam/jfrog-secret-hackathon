@@ -7,11 +7,7 @@ const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-//const TOKEN_PATH = 'token.json';
 
-
-
-//
 const TOKEN_PATH = 'http://rt-soleng.jfrog.team/artifactory/team-hackathon-stuff-local/token.json';
 // Load client secrets from a local file.
 fs.readFile('credentials.json', (err, content) => {
@@ -79,16 +75,15 @@ function listEvents(auth) {
   calendar.events.list({
     calendarId: 'primary',
     timeMin: (new Date()).toISOString(),
-    maxResults: 10,
+    timeMax: new Date(new Date().getTime() + 60 * 60 * 24 * 1000),
     singleEvents: true,
     orderBy: 'startTime',
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
     const events = res.data.items;
     if (events.length) {
-      console.log('Upcoming 10 events:');
-      /** Adding code to store the events**/
-      let token = process.env.SLACK_BOT_TOKEN
+      console.log('Upcoming events of the day:');
+ /*     let token = process.env.SLACK_BOT_TOKEN
     let Slack = require('slack')
     let bot = new Slack({token})
  
@@ -96,17 +91,7 @@ function listEvents(auth) {
   // logs {args:{hyper:'card'}}
        var result = await bot.api.test({hyper:'card'})
        console.log(result)
-})()
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+})()*/
       events.map((event, i) => {
         const start = event.start.dateTime || event.start.date;
         console.log(`${start} - ${event.summary}`);
