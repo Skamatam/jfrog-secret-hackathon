@@ -84,7 +84,15 @@ function listEvents(auth) {
     if (events.length) {
       console.log('Upcoming 10 events:');
       /** Adding code to store the events**/
-      
+      let token = process.env.SLACK_BOT_TOKEN
+    let Slack = require('slack')
+    let bot = new Slack({token})
+ 
+      ;(async function main() {
+  // logs {args:{hyper:'card'}}
+       var result = await bot.api.test({hyper:'card'})
+       console.log(result)
+})()
       
       
       
